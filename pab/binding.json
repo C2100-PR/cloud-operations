@@ -1,0 +1,12 @@
+{
+  "target": {
+    "principalSet": "//cloudresourcemanager.googleapis.com/projects/api-for-warp-drive"
+  },
+  "policyKind": "PRINCIPAL_ACCESS_BOUNDARY",
+  "policy": "organizations/0123456789012/locations/global/principalAccessBoundaryPolicies/unrestricted-access",
+  "condition": {
+    "title": "Owner access",
+    "description": "Apply only to project owner",
+    "expression": "principal.subject == 'pr@coaching2100.com'"
+  }
+}
