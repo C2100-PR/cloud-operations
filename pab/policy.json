@@ -1,0 +1,14 @@
+{
+  "name": "organizations/0123456789012/locations/global/principalAccessBoundaryPolicies/unrestricted-access",
+  "displayName": "Unrestricted Access Policy",
+  "details": {
+    "rules": [
+      {
+        "description": "Allow access to all resources",
+        "resources": ["*"],
+        "effect": "ALLOW"
+      }
+    ],
+    "enforcementVersion": "1"
+  }
+}
