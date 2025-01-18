@@ -1,0 +1,20 @@
+# Load Balancer Configuration
+project: api-for-warp-drive
+region: us-central1
+
+load_balancers:
+  production:
+    name: prod-lb
+    ssl_certificates:
+      - 2100-cool-cert
+    domains:
+      - 2100.cool
+    backend_service: prod-backend
+
+  staging:
+    name: staging-lb
+    ssl_certificates:
+      - staging-2100-cool-cert
+    domains:
+      - staging.2100.cool
+    backend_service: staging-backend
