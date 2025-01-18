@@ -1,0 +1,15 @@
+# SSL Configuration for 2100.cool domains
+
+domains:
+  production:
+    domain: 2100.cool
+    certificate_name: 2100-cool-cert
+    proxy_name: prod-https-proxy
+  staging:
+    domain: staging.2100.cool
+    certificate_name: staging-2100-cool-cert
+    proxy_name: staging-https-proxy
+
+project:
+  id: api-for-warp-drive
+  region: us-central1
