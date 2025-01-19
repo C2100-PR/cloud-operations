@@ -1,20 +1,28 @@
 import os
-from flask import Flask
+from flask import Flask, jsonify
 from google.cloud import secretmanager
-from openai import OpenAI
 
 app = Flask(__name__)
 
-def get_secret(secret_id):
+def check_secrets():
     client = secretmanager.SecretManagerServiceClient()
-    name = f"projects/api-for-warp-drive/secrets/{secret_id}/versions/latest"
-    return client.access_secret_version(request={"name": name}).payload.data.decode()
+    project = "api-for-warp-drive"
+    status = {}
+    
+    secrets = ["openai-api-key", "anthropic-api-key", "vertex-api-key", "vision-lake-key"]
+    for secret in secrets:
+        try:
+            name = f"projects/{project}/secrets/{secret}/versions/latest"
+            client.access_secret_version(request={"name": name})
+            status[secret] = "available"
+        except Exception as e:
+            status[secret] = str(e)
+    return status
 
 @app.route('/')
 def home():
-    openai_key = get_secret('openai-api-key')
-    client = OpenAI(api_key=openai_key)
-    return {'status': 'operational'}
+    status = check_secrets()
+    return jsonify(status)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=int(os.getenv('PORT', 8080)))
