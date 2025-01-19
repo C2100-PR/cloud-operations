@@ -1,0 +1,20 @@
+apiVersion: container.gke.io/v1
+kind: NodePool
+metadata:
+  name: ray-optimized
+  zone: us-west4-c
+spec:
+  autoscaling:
+    minNodeCount: 3
+    maxNodeCount: 10
+  nodeConfig:
+    machineType: n2-standard-4
+    acceleratorConfig:
+      acceleratorCount: 1
+      acceleratorType: nvidia-tesla-t4
+    labels:
+      cloud.google.com/gke-accelerator: nvidia-tesla-t4
+      ray.io/node-type: worker
+    metadata:
+      ray-node-type: worker
+    serviceAccount: gke-ray-sa@api-for-warp-drive.iam.gserviceaccount.com
