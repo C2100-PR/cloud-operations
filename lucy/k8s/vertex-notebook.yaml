@@ -1,0 +1,29 @@
+apiVersion: notebooks.cloud.google.com/v1
+kind: NotebookTemplate
+metadata:
+  name: vertex-ray-notebook
+spec:
+  template:
+    spec:
+      containers:
+      - name: notebook
+        env:
+        - name: JUPYTER_ENABLE_LAB
+          value: "true"
+        - name: RAY_ADDRESS
+          valueFrom:
+            configMapKeyRef:
+              name: notebook-distribution
+              key: RAY_ADDRESS
+        resources:
+          limits:
+            nvidia.com/gpu: 1
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: cloud.google.com/gke-nodepool
+                operator: In
+                values:
+                - ray-optimized

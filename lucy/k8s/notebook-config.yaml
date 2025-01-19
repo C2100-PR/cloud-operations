@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: notebook-distribution
+data:
+  US_CENTRAL1_WEIGHT: "40"
+  US_WEST4_WEIGHT: "40"
+  US_WEST1_WEIGHT: "20"
+  VERTEX_SCHEDULER: "enabled"
+  RAY_SHARED_MEMORY: "true"
