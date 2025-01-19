@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: port-monitor
+spec:
+  selector:
+    matchLabels:
+      app: port-monitor
+  template:
+    metadata:
+      labels:
+        app: port-monitor
+    spec:
+      containers:
+      - name: monitor
+        image: gcr.io/stackdriver-agents/stackdriver-agent:latest
+        env:
+        - name: MONITOR_PORT
+          value: "8080"
+        securityContext:
+          privileged: true
