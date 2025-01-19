@@ -1,0 +1,26 @@
+apiVersion: security.cloud.google.com/v1beta1
+kind: DiamondSecurity
+metadata:
+  name: liquid-diamond
+spec:
+  access:
+    nda:
+      required: true
+      verification: "blockchain"
+      expiration: 365d
+    invitation:
+      multiFactor: true
+      timeBoxed: true
+  encryption:
+    type: "quantum-resistant"
+    grade: "military"
+  audit:
+    frequency: "realtime"
+    aiMonitoring: true
+  isolation:
+    network: "air-gapped"
+    hardware: "dedicated"
+    firmware: "custom"
+  compliance:
+    level: "classified"
+    chain: "immutable"
