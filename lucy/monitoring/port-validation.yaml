@@ -1,0 +1,22 @@
+apiVersion: monitoring.googleapis.com/v1
+kind: MonitoredTarget
+metadata:
+  name: port-validation
+spec:
+  targets:
+    - ports: [8080, 443, 80, 10001]
+      protocol: TCP
+      validation:
+        frequency: 10s
+        timeout: 5s
+        successThreshold: 10
+        failureThreshold: 2
+      metrics:
+        - latency
+        - throughput
+        - errorRate
+        - connectionCount
+  aggregation:
+    alignmentPeriod: 60s
+    crossSeriesReducer: REDUCE_PERCENTILE_99
+    perSeriesAligner: ALIGN_DELTA

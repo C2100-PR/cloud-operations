@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: port-validator
+spec:
+  selector:
+    matchLabels:
+      app: port-validator
+  template:
+    metadata:
+      labels:
+        app: port-validator
+    spec:
+      containers:
+      - name: validator
+        image: gcr.io/stackdriver-agents/validator:latest
+        env:
+        - name: VALIDATION_FREQUENCY
+          value: "10"
+        - name: PORT_CHECK_PARALLEL
+          value: "true"
+        volumeMounts:
+        - name: socket-data
+          mountPath: /var/run/docker.sock
+      volumes:
+      - name: socket-data
+        hostPath:
+          path: /var/run/docker.sock
