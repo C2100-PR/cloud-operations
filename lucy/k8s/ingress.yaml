@@ -1,0 +1,14 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: lucy-ingress
+  annotations:
+    kubernetes.io/ingress.class: "gce"
+    kubernetes.io/ingress.global-static-ip-name: "lucy-ip"
+    networking.gke.io/v1beta1.FrontendConfig: "lucy-frontend-config"
+spec:
+  defaultBackend:
+    service:
+      name: lucy-webhook
+      port:
+        number: 80

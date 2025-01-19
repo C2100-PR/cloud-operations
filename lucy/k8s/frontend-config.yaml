@@ -1,0 +1,8 @@
+apiVersion: networking.gke.io/v1beta1
+kind: FrontendConfig
+metadata:
+  name: lucy-frontend-config
+spec:
+  redirectToHttps:
+    enabled: true
+  sslPolicy: lucy-ssl-policy
