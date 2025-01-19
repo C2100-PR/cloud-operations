@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: lucy-webhook
+spec:
+  serviceName: lucy-webhook
+  replicas: 3
+  selector:
+    matchLabels:
+      app: lucy-webhook
+  template:
+    metadata:
+      labels:
+        app: lucy-webhook
+    spec:
+      containers:
+      - name: lucy-webhook
+        image: gcr.io/api-for-warp-drive/lucy-webhook
+        ports:
+        - containerPort: 8080
+        resources:
+          requests:
+            memory: "96300Mi"
+          limits:
+            memory: "96300Mi"
+        volumeMounts:
+        - name: lucy-persistent-storage
+          mountPath: /data
+  volumeClaimTemplates:
+  - metadata:
+      name: lucy-persistent-storage
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 96300Mi
