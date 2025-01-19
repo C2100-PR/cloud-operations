@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vision-lake
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: vision-lake
+  template:
+    metadata:
+      labels:
+        app: vision-lake
+    spec:
+      containers:
+      - name: vision-lake
+        image: gcr.io/api-for-warp-drive/vision-lake
+        envFrom:
+        - configMapRef:
+            name: vision-lake-config
+        resources:
+          limits:
+            nvidia.com/gpu: 1
+        volumeMounts:
+        - name: ray-config
+          mountPath: /etc/ray
+      volumes:
+      - name: ray-config
+        configMap:
+          name: ray-cluster-config

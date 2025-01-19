@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: vision-lake-config
+data:
+  RAY_ADDRESS: "ray://ray-head-svc.ray-system.svc.cluster.local:10001"
+  VISION_LAKE_MODE: "hybrid"
+  RAY_WORKER_COUNT: "5"
+  VISION_BATCH_SIZE: "32"
+  GPU_FRACTION: "0.5"
