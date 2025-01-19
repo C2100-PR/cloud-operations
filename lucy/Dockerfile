@@ -1,6 +1,5 @@
 FROM python:3.9-slim
 WORKDIR /app
 COPY . .
-RUN pip install flask openai gunicorn
-ENV OPENAI_API_KEY=your_key_here
-CMD exec gunicorn --bind :$PORT app:app
+RUN pip install flask gunicorn
+CMD exec gunicorn --bind :$PORT --workers 1 --threads 8 app:app
