@@ -1,0 +1,22 @@
+apiVersion: aiplatform.googleapis.com/v1
+kind: EndpointTemplate
+metadata:
+  name: distributed-endpoints
+spec:
+  locations:
+  - us-central1
+  - us-west1
+  - us-west4
+  deployedModels:
+  - dedicatedResources:
+      machineSpec:
+        machineType: n1-standard-4
+        acceleratorType: NVIDIA_TESLA_T4
+        acceleratorCount: 1
+      minReplicaCount: 1
+      maxReplicaCount: 3
+    model: projects/api-for-warp-drive/models/vision-lake-model
+    automaticResources:
+      minReplicaCount: 1
+      maxReplicaCount: 5
+    trafficSplitPercent: 100
