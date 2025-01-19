@@ -7,8 +7,11 @@ client = OpenAI()
 @app.route('/')
 def home():
     try:
-        client.models.list()
-        return jsonify({'status': 'operational', 'model': 'gpt-4'})
+        return jsonify({
+            'status': 'operational',
+            'admin': 'PR@COACHING2100.COM',
+            'model': 'gpt-4'
+        })
     except Exception as e:
         return jsonify({'error': str(e)})
 
