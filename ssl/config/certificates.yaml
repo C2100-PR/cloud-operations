@@ -1,0 +1,23 @@
+# SSL Certificate Configuration
+project: api-for-warp-drive
+region: us-central1
+
+certificates:
+  production:
+    domain: 2100.cool
+    certificate_name: 2100-cool-cert
+    proxy_name: prod-https-proxy
+    monitoring_enabled: true
+    auto_renewal: true
+
+  staging:
+    domain: staging.2100.cool
+    certificate_name: staging-2100-cool-cert
+    proxy_name: staging-https-proxy
+    monitoring_enabled: true
+    auto_renewal: true
+
+monitoring:
+  expiration_alert_days: [30, 14, 7]
+  notification_channels:
+    - email: devops@2100.cool
